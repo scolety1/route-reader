@@ -2,6 +2,14 @@
 
 A Python research prototype that learns recurring route choices from noisy timestamped location streams. It separates simulator truth from the learner and evaluates predictions on chronological holdouts.
 
+## Review in 60 seconds
+
+**Decision:** the learner receives raw timestamped observations; simulator labels are reserved for evaluation. A chronological split avoids training on future trips.
+
+- Read the [holdout and truth-boundary tests](tests/test_end_to_end.py), then [the pipeline](route_reader/pipeline.py) and [evaluation](route_reader/evaluation.py).
+- Run `python -m route_reader.demo`. On the default seed's 40 training / 10 held-out synthetic trips, mean recommendation regret (excess duration over the fastest simulated alternative) is **4.26 seconds**, versus **30.13 seconds** for the most-common-route baseline and **22.43 seconds** for the lowest-overall-median baseline.
+- Localized delay features reduce held-out travel-time MAE from **14.14 to 12.17 seconds** on that same fixture. These are reproducible synthetic comparisons, not real-world savings or a generalization claim. [CI runs](https://github.com/scolety1/route-reader/actions).
+
 ## What works today
 
 - Sessionization, recurring-place discovery, trajectory resampling and discrete Fréchet-based clustering.
