@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+artifacts/
+.venv/
+
+# Generated local verification outputs
+artifacts/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
