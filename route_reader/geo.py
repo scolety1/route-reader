@@ -81,6 +81,8 @@ def resample_polyline(
 ) -> tuple[tuple[float, float], ...]:
     if count < 2:
         raise ValueError("count must be at least two")
+    if not points:
+        raise ValueError("cannot resample an empty polyline")
     total = polyline_length(points)
     if total == 0:
         return tuple(points[0] for _ in range(count))
@@ -157,3 +159,4 @@ def quantile(values: Sequence[float], probability: float) -> float:
         return ordered[lower]
     fraction = position - lower
     return ordered[lower] * (1.0 - fraction) + ordered[upper] * fraction
+
